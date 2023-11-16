@@ -1,0 +1,58 @@
+.login-auto{
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.12rem rgb(67 94 190 / 25%);
+}
+
+.form-check-input:focus{
+    border-color: #e1e3ea;
+}
+.form-check-input:checked{
+   background-color: #ffc107;
+    border-color: #ffc107;
+}
+.auth-title{
+    color:#495057;
+}
+
+
+a{
+    color: #ffc107;
+}
+.bggray{
+    background: #d3d3d324;
+    color : #000;
+}
+.text-right{
+    text-align: right;
+}
+.tableheight{
+    
+}
+.tableheight .table thead{
+    display: table;
+    width: calc(100% - 17px);
+}
+.tableheight .table tbody{
+    display: block; /* to enable vertical scrolling */
+  max-height: 200px; /* e.g. */
+  overflow-y: scroll;
+}
+.tableheight .table tbody tr {
+  display: table; /* display purpose; th's border */
+  width: 100%;
+  box-sizing: border-box; /* because of the border (Chrome needs this line, but not FF) */
+}
+.tableheight .table th,.tableheight .table td {
+  width: 27.33%; /* to enable "word-break: break-all" */
+  padding: 5px;
+  word-break: break-all; /* 4. */
+}
+.stats-icon i.ordericon{
+  margin-left: -10px;
+  margin-top: -10px;
+}
