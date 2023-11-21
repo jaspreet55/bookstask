@@ -1,7 +1,7 @@
 Laravel Framework - 10
 php     - 8.1 
 Mysql
-
+git hub project path  -  https://github.com/jaspreet55/bookstask.git
 after clone the project please add "composer update" command in terminal (for vendor folder install packages)
 
 <!-- ============================================================= -->
