@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\BookService;
 use Session;
+use Modules\Admin\App\Http\Requests\CreateBookRequest;
+use Modules\Admin\App\Http\Requests\UpdateBookRequest;
 
 class BookController extends Controller
 {
@@ -20,7 +22,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = $this->bookService->allBooks(); 
+        $books = $this->bookService->allBooksAdmin(); 
         return view('admin::book/index',compact('books'));
     }
 
@@ -35,7 +37,7 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CreateBookRequest $request): RedirectResponse
     {
         $books = $this->bookService->saveProduct($request); 
         if($books['status'] == true){
@@ -68,7 +70,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(UpdateBookRequest $request, $id): RedirectResponse
     {
                 
         $bId = base64_decode($id);

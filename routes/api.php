@@ -21,8 +21,11 @@ Route::group(['namespace'=> '\App\Http\Controllers'],function(){
 
     Route::group(['prefix'=>'v1'],function(){
         Route::post('login',['as'=>'api.login','uses'=>'Auth\LoginController@apiLogin']);
-        Route::get('book/list',['as'=>'api.book.list','uses'=>'BookController@list']);
-        Route::get('search/book',['as'=>'api.book.list','uses'=>'BookController@search']);
-        Route::get('book/detail/{id}',['as'=>'api.book.detail','uses'=>'BookController@bookDetail']);
+        Route::group(['middleware'=>'jwt_auth'],function(){
+            Route::get('book/list',['as'=>'api.book.list','uses'=>'BookController@list']);
+            Route::get('search/book',['as'=>'api.book.list','uses'=>'BookController@search']);
+            Route::get('book/detail/{id}',['as'=>'api.book.detail','uses'=>'BookController@bookDetail']);
+
+        });
     });
 });

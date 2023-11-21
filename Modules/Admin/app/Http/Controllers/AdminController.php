@@ -6,15 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use App\Services\BookService;
+use File;
 class AdminController extends Controller
 {
+    public function __construct(BookService $bookService)
+    {
+        $this->bookService = $bookService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin::index');
+        
+        $books = $this->bookService->allBooksAdmin(); 
+        return view('admin::index',compact('books'));
     }
 
     /**

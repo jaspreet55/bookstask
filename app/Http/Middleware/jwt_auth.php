@@ -2,7 +2,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-// use JWTAuth;
+use JWTAuth;
 use Exception;
 class jwt_auth
 {
@@ -16,24 +16,24 @@ class jwt_auth
     public function handle($request, Closure $next)
     {
 
-        // try{
-        //    $user = JWTAuth::parseToken()->authenticate();
+        try{
+           $user = JWTAuth::parseToken()->authenticate();
 
-        // }catch(Exception $e) {
+        }catch(Exception $e) {
 
-        //    if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+           if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
 
-        //        return response()->json(['status' => 'Token is Invalid'],400);
+               return response()->json(['status' => 'Token is Invalid'],400);
 
-        //    }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+           }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
 
-        //        return response()->json(['status' => 'Token is Expired'],401);
+               return response()->json(['status' => 'Token is Expired'],401);
 
-        //    }else{
+           }else{
 
-        //        return response()->json(['status' => 'Authorization Token not found']);
-        //    }
-        // }
+               return response()->json(['status' => 'Authorization Token not found']);
+           }
+        }
 
         return $next($request);
     }

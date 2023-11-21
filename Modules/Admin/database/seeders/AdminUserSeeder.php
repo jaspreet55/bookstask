@@ -5,6 +5,7 @@ use Modules\Admin\app\Models\AdminUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 class AdminUserSeeder extends Seeder
 {
     /**
@@ -12,6 +13,9 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+        AdminUser::truncate();
+        Schema::enableForeignKeyConstraints();
         AdminUser::create([
             'username' => 'admin',
             'firstname' => 'admin',

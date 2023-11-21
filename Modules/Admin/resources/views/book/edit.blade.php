@@ -1,43 +1,15 @@
 @extends('admin::layouts.master')
 @section('addstyle')
-    <link rel="stylesheet" href="{{asset('css/admin/assets/css/sweetalert/sweetalert.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/sweetalert/sweetalert.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 @endsection
 	@section('content')
-	<div class="row">
-        <div class="col-lg-12">
-            <div class="breadcrumbs">
-                <div class="breadcrumbs-inner">
-                    <div class="row m-0">
-                        <div class="col-sm-4">
-                            <div class="page-header float-left">
-                                <div class="page-title">
-                                    <h1>Product</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="page-header float-right">
-                                <div class="page-title">
-                                    <ol class="breadcrumb text-right">
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Book</a></li>
-                                        
-                                        <li class="active">Edit</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
           @if(Session::has('alert-' . $msg))
 
-          <div class="alert alert-{{ $msg }} alert-dismissible fade show" role="alert">
+          <div class="auto-close alert alert-{{ $msg }} alert-dismissible fade show" role="alert">
              
               {{ Session::get('alert-' . $msg) }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -45,7 +17,7 @@
           @endif
         @endforeach
         @if ($errors->any())
-                 <div class="alert alert-danger">
+                 <div class="auto-close alert alert-danger">
              @foreach ($errors->all() as $error)
                     <div>{{$error}}</div>
              @endforeach
@@ -140,7 +112,7 @@
                                         <input type="text" class="form-control" id="date" name="published" value="{{ (isset($book->published) ? $book->published: '')}}"/>
                                         <span class="input-group-append">
                                         <span class="input-group-text bg-light d-block">
-                                            <i class="fa fa-calendar"></i>
+                                            <i class="bi bi-calendar"></i>
                                         </span>
                                         </span>
                                     </div>
@@ -161,15 +133,12 @@
                                 </div>
                             </div>
                             
-                            @if(isset($book->image))
-                           
-                                 @if($book->image == '')
                                         <div class="row form-group ">
                                             <div class="col col-md-3">
                                                 {!! Form::label('prod_image', 'Image',['class'=> 'form-control-label']) !!}
                                                 
                                             </div>
-                                            <div class="col-12 col-md-9 filebrowse">
+                                            <div class="col-12 col-md-9 filebrowse" >
                                                 <label class="btn-file btn btn-primary">Browse
                                                     <input type="file" id="edit_prod_image" name="prod_image" class="form-control-file" >
                                                 </label>
@@ -181,8 +150,6 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        @endif
-                                @endif
 
                                 <div class="row append-img-edit mb-15">
                                     <div class="offset-3 col-md-9 appended-div">
@@ -191,7 +158,7 @@
                                                 <div id="preview-img-edit" class="preview-img-edit attach">
                                                     <img src="{{ asset(str_replace("\\","/",$book['image'])) }}" width="120">
                                                     <div class="overlay">
-                                                        <a href="javascript:void(0)" class="edit_product_image" data-id="{{ $book->id }}"><i class="fa fa-trash fa-2x icon "></i></a>
+                                                        <a href="javascript:void(0)" class="edit_product_image" data-id="{{ $book->id }}"><i class="bi bi-trash icon "></i></a>
                                                     </div>
                                                 </div>
                                               

@@ -3,44 +3,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	@endsection
 	@section('content')
-	<div class="row">
-        <div class="col-lg-12">
-            <div class="breadcrumbs">
-                <div class="breadcrumbs-inner">
-                    <div class="row m-0">
-                        <div class="col-sm-4">
-                            <div class="page-header float-left">
-                                <div class="page-title">
-                                    <h1>Book</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="page-header float-right">
-                                <div class="page-title">
-                                    <ol class="breadcrumb text-right">
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Book</a></li>
-                                        
-                                        <li class="active">Save</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
           @if(Session::has('alert-' . $msg))
 
-          <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+          <p class="auto-close alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
           @endif
         @endforeach
         @if ($errors->any())
-                 <div class="alert alert-danger">
+                 <div class="auto-close alert alert-danger">
              @foreach ($errors->all() as $error)
                     <div>{{$error}}</div>
              @endforeach
@@ -120,7 +92,7 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     {!! Form::text('isbn', old('isbn'), ['class' => 'form-control','placeholder' => 'Enter isbn','id' => 'bookIsbn']) !!}
-                                    @if($errors->has('genre'))
+                                    @if($errors->has('isbn'))
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $errors->first('isbn') }}</strong>
                                         </span>
@@ -136,7 +108,7 @@
                                         <input type="text" class="form-control" id="date" name="published"/>
                                         <span class="input-group-append">
                                         <span class="input-group-text bg-light d-block">
-                                            <i class="fa fa-calendar"></i>
+                                            <i class="bi bi-calendar"></i>
                                         </span>
                                         </span>
                                     </div>
@@ -211,15 +183,6 @@
 
     var count ='';
     jQuery("#prod_image").change(function(e){
-
-        // jQuery.each(e.target.files, function(index, value){
-        //     //Add your condition for allowing only specific file
-        //     var fileReader = new FileReader(); 
-
-        //     fileReader.readAsDataURL(value);
-           
-        //     fileArray.push(fileReader);
-        // });
         jQuery('.appended-div').html('');
         readimageURL(this);
     });
@@ -240,7 +203,6 @@
             }
         }else{
              jQuery('.append-img-edit').css('display','block');
-            //   jQuery('.append-img-edit').find('.appended-div').html('Three files are allowed').css("color", "red");
         }
     }
     </script>

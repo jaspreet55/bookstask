@@ -68,7 +68,7 @@ var count ='';
                     jQuery('.append-img-edit').find('.appended-div').append('<div id="preview_img_'+i+'" class="preview-img-edit">'
                         +'<img src="'+URL.createObjectURL(event.target.files[i])+'" width="120">'
                         +'<div class="overlay">'
-                    	+'<a href="javascript:void(0)" class="edit_product_image" data-id=""><i class="fa fa-trash fa-2x icon "></i></a>'
+                    	+'<a href="javascript:void(0)" class="edit_product_image" data-id=""><i class="bi bi-trash  icon "></i></a>'
                     	+'</div></div></div>');
                   
             }
@@ -98,6 +98,15 @@ jQuery(document).on('click','.edit_product_image',function(e){
     }
   
 });
+jQuery(document).ready(function(){
+    if( jQuery('.appended-div').find('img').length > 0){
+        jQuery('.filebrowse').hide();
+        jQuery('.appendimagebtn').html('');
+    }else{
+    //   jQuery('.filebrowse').show();
+     
+    }
+})
 
     jQuery(document).on('click','.edit_product_image',function(e){
     	e.preventDefault();

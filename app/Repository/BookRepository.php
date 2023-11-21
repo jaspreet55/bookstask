@@ -28,6 +28,12 @@ class BookRepository
       
        return $books;
     }
+    public function allBooksAdmin()
+    {
+       $books = Book::orderBy('id','desc')->get();
+      
+       return $books;
+    }
 
      /**
      * To save  a new product
@@ -122,9 +128,11 @@ class BookRepository
     public function getBook($bookId){
       $book =  Book::find($bookId);
       if($book != null){
-         $image = str_replace('/','\\',$book['image']);
+         if($book->image != ''){
+            $image = str_replace('/','\\',$book['image']);
+            $book['image'] = request()->getSchemeAndHttpHost().'/'.$image;
+         }
          
-         $book['image'] = $image;
       }
       return $book;
     }
@@ -170,7 +178,7 @@ class BookRepository
         if($file = $request->hasFile('prod_image') && $request->file('prod_image') != null) {
          $files = $request->file('prod_image');
          $destinationPath = "uploads/book/";
-         $attach =  Book::where('id',$data['id'])->first();
+         $attach =  Book::where('id',$id)->first();
          if(file_exists($attach->image)){
             unlink(str_replace("\\","/",$attach->image));
          }

@@ -51,6 +51,10 @@ class LoginController extends Controller
     }
     public function adminLogin(Request $request)
     {
+		$request->validate([
+            'email'   => 'required|email|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^|max:254',
+            'password' => 'required|min:6|max:20'
+        ]);
     	
 		$user = $this->service->adminLogin($request->all());
 		if( $user == true ){

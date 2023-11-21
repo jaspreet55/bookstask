@@ -24,6 +24,10 @@ class BookService {
     {
         return $this->bookRepo->allBooks($request);
     }
+    public function allBooksAdmin()
+    {
+        return $this->bookRepo->allBooksAdmin();
+    }
 
     public function saveProduct($request){
         return $this->bookRepo->saveProduct($request);
